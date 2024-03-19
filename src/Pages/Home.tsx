@@ -1,4 +1,4 @@
-import '@/Styles/Home.less';
+import "../Styles/home.less";    
 
 function Home() {
 
