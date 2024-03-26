@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import "../Styles/Login.less";
-import React from 'react';
 
 function Login() {
   const [userId, setUserId] = useState('');
@@ -45,7 +44,7 @@ function Login() {
         </div>
         <button className={`loginbtn ${loginActive ? 'active' : ''}`}>로그인</button>
         <div className="signup-link"> 
-          <Link to="/Signup">회원가입</Link> 
+          <Link to="/user/save">회원가입</Link> 
         </div>
       </div>
     </div>  
