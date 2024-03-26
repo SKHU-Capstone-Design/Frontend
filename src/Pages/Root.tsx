@@ -5,13 +5,10 @@ import "../Styles/Root.less";
 import animationData from '../Asserts/diary_animation.json';
 
 function Root() {
-    const animation = useRef<any>(null);
+    const animation = useRef<Lottie>(null);
 
     useEffect(() => {
-        if (animation.current) {
-            animation.current.setSpeed(0.5);
-            animation.current.play();
-        }
+    
     }, []);
 
     return (
