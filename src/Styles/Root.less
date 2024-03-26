@@ -1,0 +1,76 @@
+@rootBackground: linear-gradient(40deg, rgb(199, 121, 208), rgb(75, 192, 200), #2b3074);
+@rootFont: white;
+@animationWidth: 32%;
+@animationHeight: 50%;
+
+.rootwrap {
+    background: @rootBackground;
+    color: @rootFont;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    display: flex; 
+    align-items: center; 
+}
+
+.animation {
+    width: @animationWidth;
+    height: @animationHeight;
+    margin-right: 6vw; 
+}
+
+.load , .mind{
+    font-size: 2.2rem;
+    line-height: 0.6;   
+   }
+
+.smalltxt{
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 2.2;
+
+}
+
+ 
+.roottxt {
+    font-size: 2vw;
+    margin-bottom: 2vw;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center
+}
+
+.rootbtn {
+    text-align: center;
+    padding: 0.8vw;
+    border-radius: 5px;
+    width: 20vw;
+    border: 1px solid black;
+    background-color: #5AA6FF;
+    font-size: 2rem;
+
+}
+
+.inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.root{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: white;   
+}
