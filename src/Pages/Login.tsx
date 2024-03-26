@@ -1,9 +1,9 @@
-import { useState } from 'react';
+/*import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // useNavigate 임포트
 import "../Styles/Login.less";
 
 function Login() {
-  const [userId, setUserId] = useState('');
+  /*const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
   const [loginActive, setLoginActive] = useState(false); // 로그인 버튼 활성화 상태를 관리하는 상태 추가
@@ -49,12 +49,12 @@ function Login() {
           </label>
         </div>
         <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> {/* handleLogin 함수 호출 */}
-        <div className="signup-link"> 
+       /* <div className="signup-link"> 
           <Link to="/user/save">회원가입</Link> 
         </div>
       </div>
     </div>  
   );
-}
+} 
 
-export default Login;
+export default Login;*/

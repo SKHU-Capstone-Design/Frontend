@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+/*import { useState } from "react";
+import { useNavigate } from "react-router-dom"; */
 
-function Signup() {
+/*function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -46,6 +46,7 @@ function Signup() {
                 </div>
                 <div>
                 <button type="button" onClick={handlePrevious}> 이전 </button> 
+
                     <button type="submit"> 다음  </button> 
                 </div>
             </form>
@@ -53,4 +54,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default Signup;*/
