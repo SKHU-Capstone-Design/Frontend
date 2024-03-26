@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import "../Styles/Root.less";
-import animationData from '../../public/diary_animation.json';
+import animationData from '../Asserts/diary_animation.json';
 
 function Root() {
     const animation = useRef<any>(null);
