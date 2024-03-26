@@ -1,14 +1,13 @@
-/*import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // useNavigate 임포트
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; 
 import "../Styles/Login.less";
 
 function Login() {
-  /*const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
-  const [loginActive, setLoginActive] = useState(false); // 로그인 버튼 활성화 상태를 관리하는 상태 추가
-
-  const handleInputChange = (event) => {
+  const [loginActive, setLoginActive] = useState(false); 
+  const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const { name, value } = event.target;
     if (name === 'username') {
       setUserId(value);
@@ -16,7 +15,6 @@ function Login() {
       setPassword(value);
     }
     
-    // 입력된 아이디와 비밀번호가 둘 다 있을 때 로그인 버튼 활성화
     if (userId !== '' && password !== '') {
       setLoginActive(true);
     } else {
@@ -48,13 +46,13 @@ function Login() {
             간편로그인 정보 저장
           </label>
         </div>
-        <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> {/* handleLogin 함수 호출 */}
-       /* <div className="signup-link"> 
+        <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> 
+        <div className="signup-link"> 
           <Link to="/user/save">회원가입</Link> 
         </div>
       </div>
     </div>  
   );
-} 
+}
 
-export default Login;*/
+export default Login;

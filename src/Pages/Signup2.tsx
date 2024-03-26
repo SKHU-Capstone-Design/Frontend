@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 
 function Signup2() {
@@ -9,7 +9,7 @@ function Signup2() {
 
     const navigate = useNavigate(); 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         navigate("/Home"); 
     };
@@ -63,4 +63,4 @@ function Signup2() {
     );
 }
 
-export default Signup2;*/
+export default Signup2;
