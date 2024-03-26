@@ -32,7 +32,7 @@ function Root() {
                         <p className="smalltxt">다이어리와 함께 걸어요</p>
                         <div className="signup-link">
                             <button className="rootbtn">
-                                <Link to="/user/login">Let's go</Link>
+                                <Link to="/user">Let's go</Link>
                             </button>
                         </div>
                     </div>
