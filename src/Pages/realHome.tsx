@@ -1,18 +1,22 @@
-import "../Styles/Root.less"; 
+import { Link } from 'react-router-dom';
+import "../Styles/Navbar.less"; 
 
-function realHome() {
-    const handlePrevious = () => {
-    };
-
+function RealHome() {
     return (
-        <div>
-
-            <div>
-                <button type="button" onClick={handlePrevious}> 로그인  </button> 
-                <button type="button" onClick={handlePrevious}> 홈으로  </button> 
-            </div>
-        </div>
+        <nav className="navbar">
+            <ul className="nav-links">
+                <li>
+                    <Link to="/avatar" className="link">아바타</Link>
+                </li>
+                <li>
+                    <Link to="/diary" className="link">다이어리</Link>
+                </li>
+                <li>
+                    <Link to="user/home" className="link">홈</Link>
+                </li>
+            </ul>
+        </nav>
     );
 }
 
-export default realHome;
+export default RealHome;

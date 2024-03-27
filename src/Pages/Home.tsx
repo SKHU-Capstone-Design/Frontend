@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import "../Styles/Root.less"; 
 import loginFinishImage from "../public/Login_finish.png"; 
 
 function Home() {
