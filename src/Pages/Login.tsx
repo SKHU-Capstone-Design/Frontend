@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import "../Styles/Login.less";
 
 function Login() {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
-  const [loginActive, setLoginActive] = useState(false);
-
+  const navigate = useNavigate(); 
+  const [loginActive, setLoginActive] = useState(false); 
   const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const { name, value } = event.target;
     if (name === 'username') {
@@ -20,6 +20,10 @@ function Login() {
     } else {
       setLoginActive(false);
     }
+  }
+
+  const handleLogin = () => {
+    navigate('/home'); 
   }
 
   return (
@@ -42,7 +46,7 @@ function Login() {
             간편로그인 정보 저장
           </label>
         </div>
-        <button className={`loginbtn ${loginActive ? 'active' : ''}`}>로그인</button>
+        <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> 
         <div className="signup-link"> 
           <Link to="/user/save">회원가입</Link> 
         </div>
