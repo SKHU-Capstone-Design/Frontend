@@ -1,18 +1,12 @@
-import "../Styles/Root.less"; 
+import '../Styles/realhome.less';
+import Navbar from './Navbar';
 
-function realHome() {
-    const handlePrevious = () => {
-    };
-
+function RealHome() {
     return (
         <div>
-
-            <div>
-                <button type="button" onClick={handlePrevious}> 로그인  </button> 
-                <button type="button" onClick={handlePrevious}> 홈으로  </button> 
-            </div>
+                <Navbar />
         </div>
     );
 }
 
-export default realHome;
+export default RealHome;
