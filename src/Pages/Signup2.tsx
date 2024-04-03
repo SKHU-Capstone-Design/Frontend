@@ -9,19 +9,18 @@ function Signup2() {
 
     const navigate = useNavigate(); 
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        navigate("/Home"); 
-    };
-
     const handlePrevious = () => {
         navigate("/user/save");
+    };
+
+    const handleNext = () => {
+        navigate("/user/save3"); 
     };
 
     return (
         <div>
             <p>회원가입</p>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div>
                     <input 
                         type="text" 
@@ -55,8 +54,8 @@ function Signup2() {
                     />
                 </div>
                 <div>
-                <button type="button" onClick={handlePrevious}> 이전 </button> 
-                    <button type="submit"> 다음  </button> 
+                    <button type="button" onClick={handlePrevious}> 이전 </button> 
+                    <button type="button" onClick={handleNext}> 다음  </button> 
                 </div>
             </form>
         </div>
