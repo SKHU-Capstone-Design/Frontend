@@ -1,120 +1,101 @@
-body {
+body{
+  overflow: hidden;
+}
+
+.realhomewrap2 {
+  background-color: #4CBFC8;
+  width: 100%;
+  height: 100%;
+  margin-top: 0.7em;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; 
+}
+
+.myavatar, .mydiary {
+  font-weight: bold;
+  background-color: #FFFFFF;
+  width: 30em;
+  height: 30em;
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+.myavatar {
+  margin-left: 11em;
+  text-align: center;
+  margin-top: 2.2em;
+}
+
+.mydiary{
+    margin-right: 140px;
+    position: relative;
+    left: 40em;
+    bottom: 15em;
+}
+
+.mydiary img{
+  width: 100%;
+    height: 100%;
+    border-radius: 8px;
     margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  header {
-    background-color: white;
-    color: black;
-    padding: 40px;
-    text-align: center;
-    border-bottom: #555 1px solid;  
-  }
-
-  .navbar {
-    background-color: white;
-    color: black;
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .navbar ul {
-    list-style: none;
     padding: 0;
-    margin: 0;
-    margin-left: 2.5em;
-  }
-
-  .navbar li {
-    display: inline;
-    margin-right: 3.3em;
-    text-align: center;
-  }
-
-  .navbar a {
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-  }
-
-  .navbar a:hover {
-    color: gold;
-  }
-
-  footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-top: auto;
-  }
-
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-header {
-    background-color: white;
-    color: black;
-    padding: 40px;
-    text-align: center;
-    border-bottom: #555 1px solid;  
+.avatar_levelbox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 4em;
+  height: 2.2em;
+  position: relative;
+  left: 2em;
+  top: 0.8em;
+  border-radius: 3px;
+  border: none;
+  background: #E5E5E5;
+  color: #E712F9;
 }
 
-.navbar {
-    background-color: white;
-    color: black;
-    padding: 20px 0;
-    text-align: center;
+.avatar_imgbox{
+  width: 100px;
+  height: 100px;
+} 
+
+.avatar_imgbox img{
+  width: 16em;
+    margin: 0 10px;
+    position: relative;
+    top: 33px;
+    left: 69px;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 30px;
 }
 
-.navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-left: 2.5em;
+
+#avatarname{
+  position: relative;
+  top: 20px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #4CBFC8;
+  color: #4CBFC8;
+  text-align: center;
+  font-size: large;
+  
 }
 
-.navbar li {
-    display: inline;
-    margin-right: 3.3em;
-    text-align: center;
+#avatarname::placeholder {
+  color: #4CBFC8;
+  text-align: center;
+  font-size: large;
 }
-
-.navbar a {
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-    position: relative; 
-}
-
-.navbar a:hover {
-    color: gold;
-}
-
-/*가상요소를 이용해 요소삽입. */
-.navbar a:before { 
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: gold;
-    visibility: hidden; 
-    transform: scaleX(0); 
-    transition: all 0.4s ; 
-    cursor: pointer;
-}
-
-.navbar a:hover:before {
-    visibility: visible; 
-    transform: scaleX(1); 
+.home_footer{
+  background-color: #242424;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 3em;
+  
 }

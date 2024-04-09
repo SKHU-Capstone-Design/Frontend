@@ -1,12 +1,12 @@
 import '../Styles/realhome.less';
+import '../Styles/Avatar.less';
 import Navbar from './Navbar';
 import { useState, useEffect } from 'react';
 import avatarImg from "../public/avatar.png";
-import calendarImg from "../public/calendar.png";
-import { Link } from 'react-router-dom';
 
 
-function RealHome() {
+
+function Avatar() {
     //usestate를 사용하여 avatarname의 초기값을 비어있는 문자열로 설정
     const [avtarname, setAvatarname] = useState(""); 
 
@@ -44,14 +44,36 @@ function RealHome() {
                         </div>
                         <div className='avatar_levelbox'></div>
                         <div className='avatar_imgbox'>
-                        <Link to="/avatar/check">
                             <img src={avatarImg} alt="avatar" />
-                        </Link>
                     </div>
                     <div className='mydiary'>
-                        <Link to="/diary/finalAll">
-                            <img src={calendarImg} alt='calendar' /> 
-                        </Link>
+                    <div className='inputss'>
+                    <div className='inputs'>
+                        <label>닉네임</label>
+                        <input
+                            type="text"
+                            id='avatarkname'
+                            value={avtarname}
+                            onChange={ChangeAvatarName}
+                            placeholder="My Avatar"
+                        />
+                        </div>
+
+                    <div className='inputs'>
+                        <label>레벨</label>
+                        <input
+                            type="text"
+                            id='avatarlv'
+                        />
+                    </div>
+                    <div className='inputs'>
+                        <label>경험치</label>
+                        <input
+                            type="text"
+                            id='avatarkname'
+                        />
+                    </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -60,5 +82,4 @@ function RealHome() {
     </div>
     );
 }
-
-export default RealHome;
+export default Avatar;

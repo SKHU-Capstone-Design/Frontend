@@ -23,7 +23,7 @@ function Login() {
   }
 
   const handleLogin = () => {
-    navigate('/home'); 
+    navigate('/user/home'); 
   }
 
   return (
