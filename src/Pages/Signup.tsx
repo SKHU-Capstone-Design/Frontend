@@ -10,6 +10,12 @@ function Signup() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
         navigate("/user/save2"); 
     };
 
@@ -18,41 +24,46 @@ function Signup() {
     };
 
     return (
+        <div className="signupwrap0">    
         <div className="signupwrap">
             <p className="signuptext">회원가입</p>
             <form onSubmit={handleSubmit} className="form-container">
                 <div className="input-container">
-                    <label htmlFor="email">이메일</label>
                     <input 
                         type="email" 
                         id="email"
+                        placeholder="이메일"
+                        required
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)} 
                     />
                 </div>
                 <div className="input-container">
-                    <label htmlFor="password">비밀번호</label>
                     <input 
                         type="password" 
                         id="password"
+                        placeholder="비밀번호"
+                        required
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
                     />
                 </div>
                 <div className="input-container">
-                    <label htmlFor="confirmPassword">비밀번호 확인 </label>
                     <input 
                         type="password" 
                         id="confirmPassword"
+                        placeholder="비밀번호 확인"
+                        required
                         value={confirmPassword} 
                         onChange={(e) => setConfirmPassword(e.target.value)} 
                     />
                 </div>
                 <div className="button-container">
-                    <button type="button" onClick={handlePrevious}> 이전 </button> 
-                    <button type="submit"> 다음  </button> 
+                    <button type="button" onClick={handlePrevious} className="prebtn"> <p>&lt;</p> </button> 
+                    <button type="submit" className="nextbtn"> <p>&gt;</p>  </button> 
                 </div>
             </form>
+        </div>
         </div>
     );
 }
