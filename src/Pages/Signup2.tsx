@@ -20,10 +20,10 @@ function Signup2() {
 
     return (
         <div className="signupwrap0">    
-            <div className="signupwrap">
-                <p className="signuptext">회원가입</p>
-                <form onSubmit={handleSubmit} className="form-container">
-                    <div className="input-container">
+            <div className="signupwrap2">
+                <p className="signuptext2">회원가입</p>
+                <form onSubmit={handleSubmit} className="form-container2">
+                    <div className="input-container2">
                         <input 
                             type="text" 
                             id="nickname"
@@ -65,8 +65,8 @@ function Signup2() {
                         />
                     </div>
                     <div className="button-container2">
-                        <button type="button" onClick={handlePrevious} className="prebtn"> <p>&lt;</p> </button> 
-                        <button type="submit" className="nextbtn"> <p>&gt;</p>  </button> 
+                        <button type="button" onClick={handlePrevious} className="prebtn2"> <p>&lt;</p> </button> 
+                        <button type="submit" className="nextbtn2"> <p>&gt;</p>  </button> 
                     </div>
                 </form>
             </div>

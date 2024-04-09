@@ -1,120 +1,43 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  header {
-    background-color: white;
-    color: black;
-    padding: 40px;
-    text-align: center;
-    border-bottom: #555 1px solid;  
-  }
-
-  .navbar {
-    background-color: white;
-    color: black;
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-left: 2.5em;
-  }
-
-  .navbar li {
-    display: inline;
-    margin-right: 3.3em;
-    text-align: center;
-  }
-
-  .navbar a {
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-  }
-
-  .navbar a:hover {
-    color: gold;
-  }
-
-  footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-top: auto;
-  }
-
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+body{
+  overflow: hidden;
 }
 
-header {
-    background-color: white;
-    color: black;
-    padding: 40px;
-    text-align: center;
-    border-bottom: #555 1px solid;  
+.realhomewrap2 {
+  background-color: #4CBFC8;
+  width: 100%;
+  height: 100vh;
+  margin-top: 0.7em;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; 
 }
 
-.navbar {
-    background-color: white;
-    color: black;
-    padding: 20px 0;
-    text-align: center;
+.myavatar, .mydiary {
+  font-weight: bold;
+  background-color: #FFFFFF;
+  width: 30em;
+  height: 30em;
+  border-radius: 8px;
 }
 
-.navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-left: 2.5em;
+.myavatar {
+  margin-left: 100px; 
 }
 
-.navbar li {
-    display: inline;
-    margin-right: 3.3em;
-    text-align: center;
+.mydiary{
+  margin-right: 140px; 
 }
 
-.navbar a {
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-    position: relative; 
+.avatar_levelbox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
 }
 
-.navbar a:hover {
-    color: gold;
-}
-
-/*가상요소를 이용해 요소삽입. */
-.navbar a:before { 
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: gold;
-    visibility: hidden; 
-    transform: scaleX(0); 
-    transition: all 0.4s ; 
-    cursor: pointer;
-}
-
-.navbar a:hover:before {
-    visibility: visible; 
-    transform: scaleX(1); 
-}
+.avatar_imgbox{
+  width: 100px;
+  height: 100px;
+} 
