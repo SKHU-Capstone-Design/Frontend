@@ -5,7 +5,7 @@ body{
 .realhomewrap2 {
   background-color: #4CBFC8;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin-top: 0.7em;
   padding: 20px;
   display: flex;
@@ -18,26 +18,83 @@ body{
   width: 30em;
   height: 30em;
   border-radius: 8px;
+  margin-top: 40px;
 }
 
 .myavatar {
-  margin-left: 100px; 
+  margin-left: 11em;
+  text-align: center;
+  margin-top: 2.2em;
 }
 
 .mydiary{
-  margin-right: 140px; 
+    margin-right: 140px;
+    position: relative;
+    left: 40em;
+    bottom: 15em;
+}
+
+.mydiary img{
+  width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
 }
 
 .avatar_levelbox{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  border: 1px solid black;
-  width: 100px;
-  height: 100px;
+  width: 4em;
+  height: 2.2em;
+  position: relative;
+  left: 2em;
+  top: 0.8em;
+  border-radius: 3px;
+  border: none;
+  background: #E5E5E5;
 }
 
 .avatar_imgbox{
   width: 100px;
   height: 100px;
 } 
+
+.avatar_imgbox img{
+  width: 16em;
+    margin: 0 10px;
+    position: relative;
+    top: 33px;
+    left: 69px;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+
+#avatarname{
+  position: relative;
+  top: 20px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #4CBFC8;
+  color: #4CBFC8;
+  text-align: center;
+  font-size: large;
+  
+}
+
+#avatarname::placeholder {
+  color: #4CBFC8;
+  text-align: center;
+  font-size: large;
+}
+.home_footer{
+  background-color: #242424;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 3em;
+  
+}

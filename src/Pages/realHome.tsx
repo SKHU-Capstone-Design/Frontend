@@ -2,6 +2,8 @@ import '../Styles/realhome.less';
 import Navbar from './Navbar';
 import { useState, useEffect } from 'react';
 import avatarImg from "../public/avatar.png";
+import calendarImg from "../public/calendar.png";
+import { Link } from 'react-router-dom';
 
 
 function RealHome() {
@@ -34,6 +36,7 @@ function RealHome() {
                         <div className='avatar_nicknamebox'>
                             <input
                                 type="text"
+                                id='avatarname'
                                 value={avtarname}
                                 onChange={ChangeAvatarName}
                                 placeholder="My Avatar"
@@ -43,10 +46,13 @@ function RealHome() {
                         <div className='avatar_imgbox'>
                             <img src={avatarImg} alt="avatar" />
                     </div>
-                    <div className='mydiary'></div>
+                    <div className='mydiary'>
+                        <img src={calendarImg} alt='calendar' /> 
+                    </div>
                 </div>
             </div>
         </div>
+        <div className='home_footer'></div>
     </div>
     );
 }
