@@ -9,7 +9,7 @@ function Navbar() {
   <nav className="navbar">
     <ul>
       <li><a href="/avatar/check" className='hoverUnderline'>Avatar</a></li>
-      <li><a href="/" className='hoverUnderline' >Home</a></li>
+      <li><a href="/user/home" className='hoverUnderline' >Home</a></li>
       <li><a href="/diary/finalAll" className='hoverUnderline'>Diary</a></li>
     </ul>
   </nav>
