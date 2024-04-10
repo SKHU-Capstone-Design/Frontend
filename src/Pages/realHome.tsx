@@ -44,10 +44,14 @@ function RealHome() {
                         </div>
                         <div className='avatar_levelbox'></div>
                         <div className='avatar_imgbox'>
+                        <Link to="/avatar/check">
                             <img src={avatarImg} alt="avatar" />
+                        </Link>
                     </div>
                     <div className='mydiary'>
-                        <img src={calendarImg} alt='calendar' /> 
+                        <Link to="/diary/finalAll">
+                            <img src={calendarImg} alt='calendar' /> 
+                        </Link>
                     </div>
                 </div>
             </div>
