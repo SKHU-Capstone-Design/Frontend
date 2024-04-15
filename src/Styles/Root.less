@@ -15,6 +15,7 @@
     padding: 6px;
     display: flex; 
     align-items: center; 
+    justify-content: center;
 }
 
 .animation {
@@ -25,13 +26,13 @@
 
 .load , .mind{
     font-size: 2.2rem;
-    line-height: 0.6;   
+    line-height: 0.6rem;   
    }
 
 .smalltxt{
     font-size: 1rem;
     font-weight: normal;
-    line-height: 2.2;
+    line-height: 2.2rem;
 
 }
 
@@ -48,7 +49,7 @@
     text-align: center;
     padding: 0.8vw;
     border-radius: 5px;
-    width: 20vw;
+    width: 13rem;
     border: 1px solid black;
     background-color: #5AA6FF;
     font-size: 2rem;
@@ -73,4 +74,16 @@
 a{
     text-decoration: none;
     color: white;   
+}
+
+@media screen and (max-width: 768px) {
+    .load, .mind{ 
+        font-size: 1.7rem;
+
+    .animation div{
+        width: 120%;
+    }
+    }
+ 
+    
 }
