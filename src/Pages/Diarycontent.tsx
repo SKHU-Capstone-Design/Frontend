@@ -18,13 +18,13 @@ function Diarycontent() {
                 <Navbar />
                 <div className='diarybackground'>
                     <div className='dairycontent'>
-                        <div className='pencil_icon' onClick={handleEditClick}> {/* 클릭 이벤트 추가 */}
+                        <div className='pencil_icon' onClick={handleEditClick}> 
                           <BsPencil className='pencil'/> 
                         </div>
-                        <div className='diary_title'>
-                          회대 최고의 수업 소프캡디
+                        <div className='diary_title'> {/* 스타일 설정 확인을 위한 임시데이터 */}
+                          회대 최고의 수업 소프캡디 
                         </div>
-                        <div className='diary_content'>
+                        <div className='diary_content'> {/* 스타일 설정 확인을 위한 임시데이터 */}
                           나는 소프캡디 수업이 정말 좋다ㅎㅎ
                    
                         </div>

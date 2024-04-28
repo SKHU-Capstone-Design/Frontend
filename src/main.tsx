@@ -10,7 +10,6 @@ import RealHome from './Pages/realHome.tsx';
 import Signup3 from './Pages/Singup3.tsx';
 import Avatar from './Pages/Avatar.tsx';
 import Diary from './Pages/Diary.tsx';
-import DiaryEdit from './Pages/DiaryEdit.tsx';
 import DiaryWirte from './Pages/DiaryWirte.tsx';
 import Diarycontent from './Pages/Diarycontent.tsx';
 import DiaryList from './Pages/DiaryList.tsx';
@@ -30,7 +29,6 @@ root.render(
         <Route path="/user/home" element={<RealHome />} />
         <Route path="/avatar/check" element={<Avatar />} />  
         <Route path="/diary/finalAll" element={<Diary />} />
-        <Route path="/diary/put" element={<DiaryEdit />} />
         <Route path="/diary/list/:date/diary/save"  element={<DiaryWirte />} />
         <Route path="/diary/findByUserAndDate" element={<Diarycontent />} />
         <Route path="/diary/list/:date" element={<DiaryList />} />
