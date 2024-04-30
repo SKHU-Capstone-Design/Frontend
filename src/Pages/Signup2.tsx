@@ -27,6 +27,7 @@ function Signup2() {
       const response = await axios.post("http://localhost:8080/signup", data);
       if (response.status === 200) {
         console.log("success"); // 서버로부터 200 응답을 받으면 메시지 출력.
+        navigate("/user/save3"); // 코드 추가. 회원가입 성공 시 회원가입 성공 페이지로 이동하게 함
       }
     } catch (error) {
       console.error("Error:", error); // 서버로부터 200 응답을 받지 못하면 에러 출력. 개발자의 편의를 위한 코드이다.
