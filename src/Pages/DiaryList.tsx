@@ -1,33 +1,63 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../Styles/DiaryList.less';
 import Navbar from './Navbar';
 import { Link, useLocation } from 'react-router-dom';
 
-function DiaryList() { // 임시 데이터. 나중에는 사용자가 서버에 저장한 게시글이 이 리스트에 들어갈 것
-  const location = useLocation(); // 컴포넌트 내부에서 useLocation 호출. useLocation은 현재 URL을 반환하는 역할 수행
+interface DiaryPost {
+  diaryId: number;
+  title: string;
+}
 
-  const storedPosts = [
-    { No: "1", title: "임시데이터" },
-    { No: "2", title: "임시데이터" },
-    { No: "3", title: "임시데이터" },
-    { No: "4", title: "임시데이터" },
-  ];
+interface Props {
+  storedPosts: DiaryPost[];
+  location: any;
+}
 
+function DiaryList() {
+  const location = useLocation();
+  const [storedPosts, setStoredPosts] = useState<DiaryPost[]>([]);
+  
+  const getDateFromUrl = () => {
+    const pathArr = location.pathname.split('/');
+    return pathArr[pathArr.length - 1]; 
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    const date = getDateFromUrl();
+
+    axios.get(`http://localhost:8080/diary/list?date=${date}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+      .then(response => {
+        const postsWithId = response.data.map((post: any) => ({
+          diaryId: post.diaryId,
+          title: post.title
+        }));
+        setStoredPosts(postsWithId);
+      })
+      .catch(error => console.error('데이터를 불러오는 동안 오류가 발생했습니다:', error));
+  }, [location.pathname]);
+  
   return (
-    <div className="diary-container"> 
+    <div className="diary-container">
       <Navbar />
       <DiaryTable storedPosts={storedPosts} location={location} />
     </div>
   );
 }
 
-function DiaryTable({ storedPosts, location }: { storedPosts: { No: string; title: string }[]; location: ReturnType<typeof useLocation> }) {
+function DiaryTable({ storedPosts, location }: Props) {
   return (
-    <div className="diary-table-wrap"> 
+    <div className="diary-table-wrap">
       <table className='diarylist-table'>
         <thead>
           <tr>
-            <th className="diary-table-header">No</th> 
-            <th className="diary-table-header">Title</th> 
+            <th className="diary-table-header">No</th>
+            <th className="diary-table-header">Title</th>
           </tr>
         </thead>
         <tbody>
@@ -37,19 +67,19 @@ function DiaryTable({ storedPosts, location }: { storedPosts: { No: string; titl
         </tbody>
       </table>
       <div className='diary-write-btn'>
-        <Link to={`${location.pathname}/diary/save`}> {/*//useLocation으로 현재 URL을 받아온 뒤 파라미터 사용}*/}
+        <Link to={`${location.pathname}/diary/save`}>
           <button className="diary-write-button">글 작성</button>
-        </Link> 
-      </div>   
+        </Link>
+      </div>
     </div>
   );
 }
 
-function DiaryTableRow({ post }: { post: { No: string; title: string } }) {
+function DiaryTableRow({ post }: { post: DiaryPost }) {
   return (
-    <tr className="diary-table-row"> 
-      <td className="diary-table-data">{post.No}</td> 
-      <td className="diary-table-data">{post.title}</td> 
+    <tr className="diary-table-row">
+      <td className="diary-table-data">{post.diaryId}</td>
+      <td className="diary-table-data">{post.title}</td>
     </tr>
   );
 }
