@@ -1,3 +1,5 @@
+// DiaryList.tsx
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Styles/DiaryList.less';
@@ -62,7 +64,7 @@ function DiaryTable({ storedPosts, location }: Props) {
         </thead>
         <tbody>
           {storedPosts.map((post, index) => (
-            <DiaryTableRow key={index} post={post} />
+            <DiaryTableRow key={index} post={post} location={location} />
           ))}
         </tbody>
       </table>
@@ -75,11 +77,15 @@ function DiaryTable({ storedPosts, location }: Props) {
   );
 }
 
-function DiaryTableRow({ post }: { post: DiaryPost }) {
+function DiaryTableRow({ post }: { post: DiaryPost, location: any }) {
   return (
     <tr className="diary-table-row">
       <td className="diary-table-data">{post.diaryId}</td>
-      <td className="diary-table-data">{post.title}</td>
+      <td className="diary-table-data">
+        <Link to={`/diary/findByUserAndDate?date=${post.title}`} className="boardTextLink">
+          {post.title}
+        </Link>
+      </td>
     </tr>
   );
 }
