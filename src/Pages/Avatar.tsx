@@ -7,12 +7,27 @@ import avatarImg from "../public/avatar.png";
 
 function Avatar() {
     const [avatarName, setAvatarName] = useState("");
+    const [level, setLevel] = useState("");
+    const [experiencePoints, setExperiencePoints] = useState("");
 
     useEffect(() => {
-        const savedAvatarName = localStorage.getItem("avatarName");
-        if (savedAvatarName) {
-            setAvatarName(savedAvatarName);
-        }
+        const fetchAvatarInfo = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/avatar/info', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const avatarInfo = response.data;
+                setAvatarName(avatarInfo.avatarName);
+                setLevel(avatarInfo.level);
+                setExperiencePoints(avatarInfo.experiencePoints);
+            } catch (error) {
+                console.error('아바타 정보를 불러오는 중 에러 발생:', error);
+            }
+        };
+
+        fetchAvatarInfo();
     }, []);
 
     const sendAvatarNameToServer = (avatarName: string) => {
@@ -51,7 +66,9 @@ function Avatar() {
                                 placeholder="My Avatar"
                             />
                         </div>
-                        <div className='avatar_levelbox'></div>
+                        <div className='avatar_levelbox'>
+                            <p className='avatar_lv'>{level}</p>
+                        </div>
                         <div className='avatar_imgbox'>
                             <img src={avatarImg} alt="avatar" />
                         </div>
@@ -72,6 +89,8 @@ function Avatar() {
                                     <input
                                         type="text"
                                         id='avatarlv'
+                                        value={level}
+                                        readOnly
                                     />
                                 </div>
                                 <div className='inputs'>
@@ -79,6 +98,8 @@ function Avatar() {
                                     <input
                                         type="text"
                                         id='avatarExp'
+                                        value={experiencePoints}
+                                        readOnly
                                     />
                                 </div>
                             </div>
