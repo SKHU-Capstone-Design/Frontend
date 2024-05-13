@@ -13,6 +13,7 @@ import Diary from './Pages/Diary.tsx';
 import DiaryWirte from './Pages/DiaryWirte.tsx';
 import Diarycontent from './Pages/Diarycontent.tsx';
 import DiaryList from './Pages/DiaryList.tsx';
+import Mypage from './Pages/Mypage.tsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -32,6 +33,7 @@ root.render(
         <Route path="/diary/list/:date/diary/save"  element={<DiaryWirte />} />
         <Route path="/diary/findByUserAndDate" element={<Diarycontent />} />
         <Route path="/diary/list/:date" element={<DiaryList />} />
+        <Route path="/user/info" element={<Mypage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
