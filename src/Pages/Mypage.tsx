@@ -4,6 +4,7 @@ import '../Styles/realhome.less';
 import '../Styles/Avatar.less';
 import '../Styles/Mypage.less';
 import Navbar from './Navbar';
+import mypageImg from '../public/mypage.png'
 
 function Mypage() {
     const [email, setEmail] = useState(""); 
@@ -41,6 +42,7 @@ function Mypage() {
                 <Navbar />
                 <div className='realhomewrap2'>
                     <div className='myavatar'>
+                    <img src={mypageImg} alt="avatar" />
                         <div className='inputss'>
                             <div className='inputs'>
                                 <label>이메일</label>
