@@ -72,7 +72,7 @@ function Avatar() {
                         <div className='avatar_imgbox'>
                             <img src={avatarImg} alt="avatar" />
                         </div>
-                        <div className='mydiary'>
+                        <div className='mydiary'id='mydiary'>
                             <div className='inputss'>
                                 <div className='inputs'>
                                     <label>닉네임</label>
