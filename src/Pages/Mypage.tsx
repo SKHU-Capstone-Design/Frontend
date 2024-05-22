@@ -44,10 +44,10 @@ function Mypage() {
                     <div className='myavatar'>
                     <img src={mypageImg} alt="avatar" />
                         <div className='inputss'>
-                            <div className='inputs'>
+                            <div className='inputs' id='inputs'>
                                 <label>이메일</label>
                                 <input
-                                    type="text"
+                                    type="string"
                                     id='useremail'
                                     value={email}
                                     readOnly
@@ -56,7 +56,7 @@ function Mypage() {
                             <div className='inputs'>
                                 <label>이름</label>
                                 <input
-                                    type="text"
+                                    type="string"
                                     id='username'
                                     value={name}
                                     readOnly
@@ -68,7 +68,7 @@ function Mypage() {
                                 <div className='inputs'>
                                     <label>성별</label>
                                     <input
-                                        type="text"
+                                        type="string"
                                         id='userGender'
                                         value={gender}
                                         readOnly
@@ -77,7 +77,7 @@ function Mypage() {
                                 <div className='inputs'>
                                     <label>나이</label>
                                     <input
-                                        type="text"
+                                        type="string"
                                         id='userAge'
                                         value={age}
                                         readOnly

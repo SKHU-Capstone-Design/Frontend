@@ -65,7 +65,7 @@ function RealHome() {
                                 <img src={avatarImg} alt="avatar" />
                             </Link>
                         </div>
-                        <div className='mydiary'>
+                        <div className='mydiary' id='mydiary'>
                             <Link to="/diary/finalAll">
                                 <img src={calendarImg} alt='calendar' /> 
                             </Link>
