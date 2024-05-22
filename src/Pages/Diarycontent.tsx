@@ -13,7 +13,6 @@ function Diarycontent() {
   const handleEditClick = () => {
     setIsEditMode(!isEditMode);
     if (isEditMode && titleRef.current && contentRef.current) {
-      // 수정 모드에서 나갈 때 내용 저장
       setTitle(titleRef.current.innerText);
       setContent(contentRef.current.innerText);
     }
