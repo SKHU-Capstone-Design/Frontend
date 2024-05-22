@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <div className='navbarWrap'>
     <header className='navHeader'>
-        <h1>Capstone</h1>
+        <h1><a href="/user/home" className='capstoneMaintxt'>Capstone</a></h1>
   </header>
   <nav className="navbar">
     <ul>
