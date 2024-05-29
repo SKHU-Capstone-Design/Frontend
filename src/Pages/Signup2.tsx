@@ -1,18 +1,58 @@
-import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useState, ChangeEvent, FormEvent } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../Styles/Signup2.less";
 import axios from "axios";
 
+interface State {
+  email: string;
+  password: string;
+}
+
 function Signup2() {
-  const { state } = useLocation();
-  const [nickname, setNickname] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [phonenum, setPhonenum] = useState("");
+  const location = useLocation();
+  const state = location.state as State;
+
+  const [nickname, setNickname] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
+  const [phonenum, setPhonenum] = useState<string>("");
+  const [isNicknameValid, setIsNicknameValid] = useState<boolean>(true);
+  const [isPhonenumValid, setIsPhonenumValid] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const validateNickname = (nickname: string): boolean => {
+    const nicknameRegex = /^[a-zA-Z0-9가-힣]{1,13}$/; 
+    return nicknameRegex.test(nickname);
+  };
+
+  const validatePhoneNumber = (number: string): boolean => {
+    const phoneRegex = /^[0-9]{10,11}$/; 
+    return phoneRegex.test(number);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+
+    const isNicknameValid = validateNickname(nickname);
+    const isPhonenumValid = validatePhoneNumber(phonenum);
+
+    setIsNicknameValid(isNicknameValid);
+    setIsPhonenumValid(isPhonenumValid);
+
+    let errorMessage = '';
+
+    if (!isNicknameValid) {
+      errorMessage += '닉네임은 1-13 글자까지 입력할 수 있으며, 특수기호를 사용할 수 없습니다\n';
+    }
+
+    if (!isPhonenumValid) {
+      errorMessage += '전화번호는 10자리 또는 11자리 숫자로 입력해주세요\n';
+    }
+
+    if (errorMessage !== '') {
+      alert(errorMessage);
+      return;
+    }
 
     const data = {
       email: state.email,
@@ -26,16 +66,30 @@ function Signup2() {
     try {
       const response = await axios.post("http://localhost:8080/signup", data);
       if (response.status === 200) {
-        console.log("success"); // 서버로부터 200 응답을 받으면 메시지 출력.
-        navigate("/user/save3"); // 코드 추가. 회원가입 성공 시 회원가입 성공 페이지로 이동하게 함
+        console.log("success");
+        navigate("/user/save3");
       }
     } catch (error) {
-      console.error("Error:", error); // 서버로부터 200 응답을 받지 못하면 에러 출력. 개발자의 편의를 위한 코드이다.
+      console.error("Error:", error);
     }
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = (): void => {
     navigate("/user/save");
+  };
+
+  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value;
+    if (value.length <= 13) {
+      setNickname(value);
+      setIsNicknameValid(validateNickname(value));
+    }
+  };
+
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value.replace(/-/g, ""); 
+    setPhonenum(value);
+    setIsPhonenumValid(validatePhoneNumber(value));
   };
 
   return (
@@ -50,7 +104,8 @@ function Signup2() {
               placeholder="닉네임"
               required
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={handleNicknameChange}
+              className={!isNicknameValid ? 'invalid' : ''}
             />
           </div>
           <div className="input-container2">
@@ -60,14 +115,14 @@ function Signup2() {
               placeholder="나이"
               required
               value={age}
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setAge(e.target.value)}
             />
           </div>
           <div className="input-container2">
             <select
               id="gender"
               value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setGender(e.target.value)}
             >
               <option value="">성별을 선택해주세요</option>
               <option value="MALE">남성</option>
@@ -81,7 +136,8 @@ function Signup2() {
               placeholder="휴대폰 번호"
               required
               value={phonenum}
-              onChange={(e) => setPhonenum(e.target.value)}
+              onChange={handlePhoneChange}
+              className={!isPhonenumValid ? 'invalid' : ''}
             />
           </div>
           <div className="button-container2">
