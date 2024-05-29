@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import '../Styles/Diarycontent.less';
 import Navbar from './Navbar';
-import { BsPencil } from "react-icons/bs";
+import { BsPencil, BsTrash } from "react-icons/bs";
 
 function Diarycontent() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -24,8 +24,13 @@ function Diarycontent() {
         <Navbar />
         <div className='diarybackground'>
           <div className='dairycontent'>
-            <div className='pencil_icon' onClick={handleEditClick}> 
-              <BsPencil className='pencil'/> 
+            <div className='icons'>
+              <div className='icon' onClick={handleEditClick}> 
+                <BsPencil className='pencil'/> 
+              </div>
+              <div className='icon'>
+                <BsTrash className='trash' />
+              </div>
             </div>
             <div 
               className='diary_title'
