@@ -4,15 +4,16 @@ import axios from 'axios';
 import '../Styles/Login.less';
 
 function Login() {
-  const [email, setemail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
   const [loginActive, setLoginActive] = useState(false); 
+  const [saveLogin, setSaveLogin] = useState(false); // 로그인 정보 저장 여부
 
   const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const { name, value } = event.target;
     if (name === 'email') {
-      setemail(value);
+      setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
     }
@@ -33,10 +34,10 @@ function Login() {
 
       const accessToken = response.data.accessToken;
 
-      // 토큰을 로컬 스토리지에 저장
-      localStorage.setItem('accessToken', accessToken);
+      if (saveLogin) {
+        localStorage.setItem('accessToken', accessToken);
+      }
 
-      // 홈 페이지로 이동
       navigate('/user/home'); 
     } catch (error) {
       console.error('로그인 실패:', error);
@@ -55,6 +56,17 @@ function Login() {
         <div className='pwbox'>
           <label>
             <input type="password" name="password" placeholder="비밀번호" value={password} onChange={handleInputChange} />
+          </label>
+        </div>
+        <div className="save-login"> {/* 로그인 정보 저장 체크박스 */}
+          <label>
+            <input 
+              type="checkbox" 
+              name="saveLogin" 
+              checked={saveLogin} 
+              onChange={() => setSaveLogin(!saveLogin)} 
+            /> 
+            간편 로그인 정보 저장
           </label>
         </div>
         <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> 
