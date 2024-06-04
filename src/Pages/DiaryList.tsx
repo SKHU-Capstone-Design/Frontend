@@ -1,5 +1,3 @@
-// DiaryList.tsx
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Styles/DiaryList.less';
@@ -9,11 +7,6 @@ import { Link, useLocation } from 'react-router-dom';
 interface DiaryPost {
   diaryId: number;
   title: string;
-}
-
-interface Props {
-  storedPosts: DiaryPost[];
-  location: any;
 }
 
 function DiaryList() {
@@ -47,12 +40,17 @@ function DiaryList() {
   return (
     <div className="diary-container">
       <Navbar />
-      <DiaryTable storedPosts={storedPosts} location={location} />
+      <DiaryTable storedPosts={storedPosts} />
     </div>
   );
 }
 
-function DiaryTable({ storedPosts, location }: Props) {
+interface DiaryTableProps {
+  storedPosts: DiaryPost[];
+}
+
+function DiaryTable({ storedPosts }: DiaryTableProps) {
+  const location = useLocation();
   return (
     <div className="diary-table-wrap">
       <table className='diarylist-table'>
@@ -64,7 +62,7 @@ function DiaryTable({ storedPosts, location }: Props) {
         </thead>
         <tbody>
           {storedPosts.map((post, index) => (
-            <DiaryTableRow key={index} post={post} location={location} />
+            <DiaryTableRow key={index} post={post} />
           ))}
         </tbody>
       </table>
@@ -77,12 +75,17 @@ function DiaryTable({ storedPosts, location }: Props) {
   );
 }
 
-function DiaryTableRow({ post }: { post: DiaryPost, location: any }) {
+interface DiaryTableRowProps {
+  post: DiaryPost;
+}
+
+function DiaryTableRow({ post }: DiaryTableRowProps) {
+  const location = useLocation();
   return (
     <tr className="diary-table-row">
       <td className="diary-table-data">{post.diaryId}</td>
       <td className="diary-table-data">
-        <Link to={`/diary/findByUserAndDate?date=${post.title}`} className="boardTextLink">
+        <Link to={`${location.pathname}/diary/findByUserAndDate?date=${post.diaryId}`} className="boardTextLink">
           {post.title}
         </Link>
       </td>
