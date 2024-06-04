@@ -56,7 +56,7 @@ function Mypage() {
                             <div className='inputs'>
                                 <label>이름</label>
                                 <input
-                                    type="string"
+                                    type="text"
                                     id='username'
                                     value={name}
                                     readOnly
@@ -68,7 +68,7 @@ function Mypage() {
                                 <div className='inputs'>
                                     <label>성별</label>
                                     <input
-                                        type="string"
+                                        type="text"
                                         id='userGender'
                                         value={gender}
                                         readOnly
@@ -77,7 +77,7 @@ function Mypage() {
                                 <div className='inputs'>
                                     <label>나이</label>
                                     <input
-                                        type="string"
+                                        type="text"
                                         id='userAge'
                                         value={age}
                                         readOnly
