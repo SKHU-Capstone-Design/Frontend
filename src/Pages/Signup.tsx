@@ -1,128 +1,67 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styles/Signup.less";
+import "../Styles/Signup.less"; 
+
 
 function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
-    const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
-    const navigate = useNavigate();
-
-    const validateEmail = (email: string) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const invalidCharRegex = /[~!#$%^&*()_+|<>?:{}]/; // 허용되지 않는 특수기호 검사
-        return emailRegex.test(email) && !invalidCharRegex.test(email);
-    };
-
-    const validatePassword = (password:any) => {
-        return password.length >= 6;
-    };
-
-    const validateConfirmPassword = (password: string, confirmPassword: string) => {
-        return password === confirmPassword;
-    };
+    const navigate = useNavigate(); 
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        
-        const isEmailValid = validateEmail(email);
-        const isPasswordValid = validatePassword(password);
-        const isConfirmPasswordValid = validateConfirmPassword(password, confirmPassword);
 
-        setIsEmailValid(isEmailValid);
-        setIsPasswordValid(isPasswordValid);
-        setIsConfirmPasswordValid(isConfirmPasswordValid);
-
-        let errorMessage = '';
-
-        if (!isEmailValid) {
-            errorMessage += '올바르지 않은 이메일 형식입니다\n';
-        }
-        if (!isPasswordValid) {
-            errorMessage += '비밀번호는 6자 이상이어야 합니다\n';
-        }
-        if (!isConfirmPasswordValid) {
-            errorMessage += '비밀번호가 일치하지 않습니다\n';
-
-            // 비밀번호가 일치하지 않을 경우, 비밀번호 입력창 초기화
-            setPassword('');    
-        } // Add closing parenthesis here
-
-        if (errorMessage !== '') {
-            alert(errorMessage);
+        if (password !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다.");
             return;
         }
 
-        navigate("/user/save2", { state: { email, password } });
+        navigate("/user/save2", { state: { email, password } }); 
     };
 
     const handlePrevious = () => {
-        navigate("/user");
-    };
-
-    const handleEmailChange = (e: { target: { value: any; }; }) => {
-        const value = e.target.value;
-        setEmail(value);
-        setIsEmailValid(validateEmail(value));
-    };
-
-    const handlePasswordChange = (e: { target: { value: any; }; }) => {
-        const value = e.target.value;
-        setPassword(value);
-        setIsPasswordValid(validatePassword(value));
-        setIsConfirmPasswordValid(validateConfirmPassword(value, confirmPassword));
-    };
-
-    const handleConfirmPasswordChange = (e: { target: { value: any; }; }) => {
-        const value = e.target.value;
-        setConfirmPassword(value);
-        setIsConfirmPasswordValid(validateConfirmPassword(password, value));
+        navigate("/user"); 
     };
 
     return (
-        <div className="signupwrap0">
+        <div className="signupwrap0">    
             <div className="signupwrap">
                 <p className="signuptext">회원가입</p>
                 <form onSubmit={handleSubmit} className="form-container">
                     <div className="input-container">
-                        <input
-                            type="email"
+                        <input 
+                            type="email" 
                             id="email"
                             placeholder="이메일"
                             required
-                            value={email}
-                            onChange={handleEmailChange}
-                            className={!isEmailValid ? 'invalid' : ''}
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
                         />
                     </div>
                     <div className="input-container">
-                        <input
-                            type="password"
+                        <input 
+                            type="password" 
                             id="password"
                             placeholder="비밀번호"
                             required
-                            value={password}
-                            onChange={handlePasswordChange}
-                            className={!isPasswordValid ? 'invalid' : ''}
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
                         />
                     </div>
                     <div className="input-container">
-                        <input
-                            type="password"
+                        <input 
+                            type="password" 
                             id="confirmPassword"
                             placeholder="비밀번호 확인"
                             required
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            className={!isConfirmPasswordValid ? 'invalid' : ''}
+                            value={confirmPassword} 
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
                         />
                     </div>
                     <div className="button-container">
-                        <button type="button" onClick={handlePrevious} className="prebtn"> <p>&lt;</p> </button>
-                        <button type="submit" className="nextbtn"> <p>&gt;</p> </button>
+                        <button type="button" onClick={handlePrevious} className="prebtn"> <p>&lt;</p> </button> 
+                        <button type="submit" className="nextbtn"> <p>&gt;</p>  </button> 
                     </div>
                 </form>
             </div>
