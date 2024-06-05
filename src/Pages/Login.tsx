@@ -19,6 +19,11 @@ function Login() {
       setEmail(savedEmail);
       setPassword(savedPassword);
       setSaveLogin(true);
+
+      // 컴포넌트가 랜더링되는 즉시 로컬스토리지에 저장된 이메일과 비밀번호가 있으면 로그인 버튼 활성화
+      if (savedEmail !== '' && savedPassword !== '') {
+        setLoginActive(true);
+      }
     }
   }, []);
 
@@ -66,7 +71,7 @@ function Login() {
       localStorage.setItem('accessToken', accessToken);
 
       navigate('/user/home'); 
-    } catch (error) {
+    } catch (error: any) {
       console.error('로그인 실패:', error);
     }
   }
