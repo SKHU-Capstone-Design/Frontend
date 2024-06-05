@@ -7,15 +7,26 @@ import Navbar from './Navbar';
 import '../Styles/realhome.less';
 import '../Styles/Diary.less';
 
-function Diary() {
-  const { date } = useParams(); 
-  const [Body, setBody] = useState({
+interface DiaryState {
+  title: string;
+  body: string;
+  date: string;
+}
+
+interface Params {
+  [key: string]: string | undefined;
+}
+
+const Diary: React.FC = () => {
+  const { date } = useParams<Params>(); 
+  const [Body, setBody] = useState<DiaryState>({
     title: '',
     body: '',
-    date: date 
+    date: date || '' // URL 파라미터로부터 받은 날짜를 상태에 포함, date가 undefined일 경우 빈 문자열 할당
+    // 코드 수정 이전, 쿼리 파라미터로 서버에 요청을 보냈더니 서버에서 날짜를 식별하지 못했다. 백엔드 코드를 재검토한 결과, 본문(body)에서 날짜를 받아야 했다.    
   });
 
-  const getValue = (e: { target: { name: string; value: string; }; }) => {
+  const getValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setBody({
       ...Body,
@@ -25,9 +36,10 @@ function Diary() {
 
   const todayDiarySave = async () => {
     try {
-      await axios.post(`http://localhost:8080/diary/save?date=${date}`, {
+      await axios.post('http://localhost:8080/diary/save', {
         title: Body.title,
-        body: Body.body
+        body: Body.body,
+        date: Body.date // date 필드를 포함하여 전송
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`
