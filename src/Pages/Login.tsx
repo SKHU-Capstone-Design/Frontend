@@ -59,14 +59,14 @@ function Login() {
           </label>
         </div>
         <div className="save-login"> {/* 로그인 정보 저장 체크박스 */}
-          <label>
+          <label className="checkbox-label">
             <input 
               type="checkbox" 
               name="saveLogin" 
               checked={saveLogin} 
               onChange={() => setSaveLogin(!saveLogin)} 
             /> 
-            간편 로그인 정보 저장
+            <span className="checkbox-text">간편 로그인 정보 저장</span>
           </label>
         </div>
         <button className={`loginbtn ${loginActive ? 'active' : ''}`} onClick={handleLogin}>로그인</button> 
