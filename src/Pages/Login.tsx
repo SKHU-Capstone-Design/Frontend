@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
 import axios from 'axios';
 import '../Styles/Login.less';
@@ -6,9 +6,21 @@ import '../Styles/Login.less';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const [saveLogin, setSaveLogin] = useState(false);
   const [loginActive, setLoginActive] = useState(false); 
-  const [saveLogin, setSaveLogin] = useState(false); // 로그인 정보 저장 여부
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('email');
+    const savedPassword = localStorage.getItem('password');
+    const savedSaveLogin = localStorage.getItem('saveLogin') === 'true';
+
+    if (savedSaveLogin && savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setSaveLogin(true);
+    }
+  }, []);
 
   const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const { name, value } = event.target;
@@ -17,13 +29,31 @@ function Login() {
     } else if (name === 'password') {
       setPassword(value);
     }
-    
+
     if (email !== '' && password !== '') {
       setLoginActive(true);
     } else {
       setLoginActive(false);
     }
+
+    if (saveLogin) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    }
   }
+
+  const handleCheckboxChange = () => {
+    setSaveLogin(!saveLogin);
+    if (!saveLogin) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+      localStorage.setItem('saveLogin', 'true');
+    } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('saveLogin');
+    }
+  };
 
   const handleLogin = async () => {
     try {
@@ -33,10 +63,7 @@ function Login() {
       });
 
       const accessToken = response.data.accessToken;
-
-      if (saveLogin) {
-        localStorage.setItem('accessToken', accessToken);
-      }
+      localStorage.setItem('accessToken', accessToken);
 
       navigate('/user/home'); 
     } catch (error) {
@@ -50,21 +77,33 @@ function Login() {
       <div className="gray-box">
         <div className='idbox'>
           <label>
-            <input type="text" name="email" placeholder="아이디" value={email} onChange={handleInputChange} />
+            <input 
+              type="text" 
+              name="email" 
+              placeholder="아이디" 
+              value={email} 
+              onChange={handleInputChange} 
+            />
           </label>
         </div>
         <div className='pwbox'>
           <label>
-            <input type="password" name="password" placeholder="비밀번호" value={password} onChange={handleInputChange} />
+            <input 
+              type="password" 
+              name="password" 
+              placeholder="비밀번호" 
+              value={password} 
+              onChange={handleInputChange} 
+            />
           </label>
         </div>
-        <div className="save-login"> {/* 로그인 정보 저장 체크박스 */}
+        <div className="save-login">
           <label className="checkbox-label">
             <input 
               type="checkbox" 
               name="saveLogin" 
               checked={saveLogin} 
-              onChange={() => setSaveLogin(!saveLogin)} 
+              onChange={handleCheckboxChange} 
             /> 
             <span className="checkbox-text">간편 로그인 정보 저장</span>
           </label>
