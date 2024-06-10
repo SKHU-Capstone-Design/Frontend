@@ -1,0 +1,75 @@
+@modal-primary-color: gray;
+@modal-hover-background-color: #4CBFC8;
+@modal-hover-color: white;
+@modal-border-color: #BFBABA;
+@modal-background-color: white;
+
+.modal-reset-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-reset-modal-box-container {
+    background-color: @modal-background-color;
+    border-radius: 10px;
+    text-align: center;
+    height: auto;
+    width: 80%;
+
+    @media (min-width: 576px) {
+        width: 80%;
+    }
+
+    @media (min-width: 768px) {
+        width: 70%;
+    }
+
+    @media (min-width: 992px) {
+        width: 50%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 30%;
+    }
+}
+
+.modal-reset-modal-title {
+    font-size: 1rem;
+    margin: 60px;
+    margin-bottom: 40px;
+}
+
+.modal-reset-modal-button,
+.modal-reset-modal-button-no {
+    cursor: pointer;
+    background-color: @modal-background-color;
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    border: none;
+    border-top: 0.5px solid @modal-border-color;
+
+    &:hover {
+        background-color: @modal-hover-background-color;
+        color: @modal-hover-color;
+    }
+}
+
+.modal-reset-modal-button {
+    color: @modal-primary-color;
+    border-right: 0.5px solid @modal-border-color;
+    border-radius: 0 0 0 10px;
+}
+
+.modal-reset-modal-button-no {
+    color: black;
+    border-radius: 0 0 10px 0;
+}
