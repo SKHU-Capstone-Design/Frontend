@@ -1,0 +1,79 @@
+/* Mypage.less */
+
+@mypage-primary-color: #DC3412;
+@mypage-secondary-color: #f8f9fa;
+@mypage-card-background: #ffffff;
+@mypage-text-color: #333;
+@mypage-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+@mypage-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+@mypage-background-image: url('path/to/background-image.jpg');
+
+.my-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: @mypage-gradient;
+  min-height: 100vh;
+  background-image: @mypage-background-image;
+  background-size: cover;
+  background-position: center;
+}
+
+.my-page-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: @mypage-card-background;
+  border-radius: 10px;
+  box-shadow: @mypage-box-shadow;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.my-page-text-navi {
+  font-size: 1.2rem;
+  color: @mypage-text-color;
+  display: flex;
+  align-items: center;
+}
+
+.my-page-icon {
+  font-size: 1.5rem;
+  color: @mypage-primary-color;
+  transition: color 0.2s ease;
+}
+
+.my-page-icon:hover {
+  color: darken(@mypage-primary-color, 10%);
+}
+
+.my-page-title {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.my-page-header {
+  font-size: 1.5rem;
+  color: @mypage-text-color;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.my-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}

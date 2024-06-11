@@ -14,6 +14,8 @@ import DiaryWirte from './Pages/DiaryWirte.tsx';
 import Diarycontent from './Pages/Diarycontent.tsx';
 import DiaryList from './Pages/DiaryList.tsx';
 import Mypage from './Pages/Mypage.tsx';
+import Realmypage from './Pages/Realmypage.tsx';
+import ByeWebsiste from './Pages/ByeWebsite.tsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -31,9 +33,11 @@ root.render(
         <Route path="/avatar/check" element={<Avatar />} />  
         <Route path="/diary/finalAll" element={<Diary />} />
         <Route path="/diary/list/:date/diary/save"  element={<DiaryWirte />} />
-        <Route path="/diary/findByUserAndDate" element={<Diarycontent />} />
+        <Route path="/diary/:date/:diaryId/findByuserAndDate" element={<Diarycontent />} />
         <Route path="/diary/list/:date" element={<DiaryList />} />
         <Route path="/user/info" element={<Mypage />} />
+        <Route path="/user/info/real" element={<Realmypage />} />
+        <Route path="/user/bye" element={<ByeWebsiste />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
