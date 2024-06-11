@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from 'react-router-dom';
 import NavBar from './Navbar.tsx';
 import { GoChevronRight, GoPerson, GoSignOut } from 'react-icons/go';
