@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 import '../Styles/realhome.less';
 import '../Styles/Avatar.less';
 import Navbar from './Navbar';
 import avatarImg from "../public/avatar.png";
 import calendarImg from "../public/calendar.png";
-import { Link } from 'react-router-dom';
-
 
 function RealHome() {
     const [avatarName, setAvatarName] = useState(""); 
     const [avatarLevel, setAvatarLevel] = useState(0); 
+    const navigate = useNavigate(); 
+
     useEffect(() => { 
         const savedAvatarName = localStorage.getItem("avatarName");
         if (savedAvatarName) {
@@ -26,9 +27,10 @@ function RealHome() {
             setAvatarLevel(response.data.level);
         })
         .catch(error => {
-            alert('아바타 레벨을 불러오는 동안 오류가 발생했습니다:'+ error);
+            alert('아바타 레벨을 불러오는 동안 오류가 발생했습니다: ' + error);
+            navigate('/user/login'); 
         });
-    }, []);
+    }, [navigate]);
 
     const handleAvatarNameChange = (e: { target: { value: any; }; }) => {
         const { value } = e.target;
@@ -39,7 +41,10 @@ function RealHome() {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
-        })
+        }).catch(error => {
+            alert('아바타 이름을 저장하는 동안 오류가 발생했습니다: ' + error);
+            navigate('/user/login'); 
+        });
     };
 
     return (
