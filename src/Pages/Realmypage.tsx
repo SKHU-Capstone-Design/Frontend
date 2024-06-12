@@ -1,5 +1,5 @@
-// 완성본 아님
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Styles/realhome.less';
 import '../Styles/Avatar.less';
@@ -13,7 +13,8 @@ function Mypage() {
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
     const [phone, setPhone] = useState("");
-    
+    const navigate = useNavigate(); 
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -25,8 +26,6 @@ function Mypage() {
                 
                 const userInfo = response.data;
 
-                /* 수정 전: input 요소의 값이 정의된 상태에서 정의되지 않은 상태로 변경되면서 경고가 발생하고, input요소에 사용자 정보가 출력되지 않음.
-                이를 방지하기 위해, undefined 또는 null 값을 빈 문자열로 대체. input 요소의 값이 항상 정의된 상태로 유지되도록 수정함. */
                 setEmail(userInfo.email || "");
                 setName(userInfo.name || ""); 
                 setGender(userInfo.gender || ""); 
@@ -34,11 +33,13 @@ function Mypage() {
                 setPhone(userInfo.phone || ""); 
             } catch (error) {
                 console.error('사용자 정보를 불러오는 중 에러 발생:', error);
+                alert('네트워크 에러가 발생했습니다. 다시 로그인해주세요.');
+                navigate('/user/login'); 
             }
         };
 
         fetchUserInfo();
-    }, []);
+    }, [navigate]);
 
     return (
         <div>
