@@ -13,7 +13,7 @@ function Avatar() {
     useEffect(() => {
         const fetchAvatarInfo = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/avatar/info', {
+                const response = await axios.get('http://34.239.189.147:8080/avatar/info', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -31,7 +31,7 @@ function Avatar() {
     }, []);
 
     const sendAvatarNameToServer = (avatarName: string) => {
-        axios.post('http://localhost:8080/avatar/name', { avatarName }, {
+        axios.post('http://34.239.189.147:8080/avatar/name', { avatarName }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

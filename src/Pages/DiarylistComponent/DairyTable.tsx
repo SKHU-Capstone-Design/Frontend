@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
 
 // 다이어리 게시물의 인터페이스 정의
 interface DiaryPost {
@@ -58,4 +60,36 @@ function DiaryTableRow({ post, location }: DiaryTableRowProps) {
   );
 }
 
-export default DiaryTable;
+// DiaryList 컴포넌트 정의
+function DiaryList() {
+  const location = useLocation();
+  const [storedPosts, setStoredPosts] = useState<DiaryPost[]>([]);
+
+  const getDateFromUrl = () => {
+    const pathArr = location.pathname.split('/');
+    return pathArr[pathArr.length - 1]; 
+  };
+
+  useEffect(() => {
+    const fetchDiariesByDate = async () => {
+      try {
+        const date = getDateFromUrl();
+        const response = await axios.get(`http://localhost:5173/diary/list/${date}`);
+        setStoredPosts(response.data);
+      } catch (error) {
+        console.error('다이어리 목록을 불러오는 중 에러 발생:', error);
+      }
+    };
+
+    fetchDiariesByDate();
+  }, [location.pathname]);
+
+  return (
+    <div className="diary-container">
+      <h1>다이어리 목록</h1>
+      <DiaryTable storedPosts={storedPosts} location={location} />
+    </div>
+  );
+}
+
+export default DiaryList;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../Styles/realhome.less';
 import '../Styles/Avatar.less';
 import Navbar from './Navbar';
@@ -10,7 +10,6 @@ import calendarImg from "../public/calendar.png";
 function RealHome() {
     const [avatarName, setAvatarName] = useState(""); 
     const [avatarLevel, setAvatarLevel] = useState(0); 
-    const navigate = useNavigate(); 
 
     useEffect(() => { 
         const savedAvatarName = localStorage.getItem("avatarName");
@@ -18,32 +17,25 @@ function RealHome() {
             setAvatarName(savedAvatarName);
         }
 
-        axios.get('http://localhost:8080/avatar/info', {
+        axios.get('http://34.239.189.147:8080/avatar/info', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
         .then(response => {
             setAvatarLevel(response.data.level);
-        })
-        .catch(error => {
-            alert('아바타 레벨을 불러오는 동안 오류가 발생했습니다: ' + error);
-            navigate('/user/login'); 
         });
-    }, [navigate]);
+    }, []);
 
     const handleAvatarNameChange = (e: { target: { value: any; }; }) => {
         const { value } = e.target;
         setAvatarName(value);
         localStorage.setItem("avatarName", value);
 
-        axios.post('http://localhost:8080/avatar/name', { avatarName: value }, {
+        axios.post('http://34.239.189.147:8080/avatar/name', { avatarName: value }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
-        }).catch(error => {
-            alert('아바타 이름을 저장하는 동안 오류가 발생했습니다: ' + error);
-            navigate('/user/login'); 
         });
     };
 
