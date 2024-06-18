@@ -27,12 +27,11 @@ function Diarycontent() {
     // 서버로부터 다이어리 데이터를 불러옴
     const fetchDiary = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/diary/${diaryId}`, {
+        const response = await axios.get(`http://34.239.189.147:8080/diary/${diaryId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`
           }
         });
-        // 서버 응답 데이터를 상태에 설정
         const diaryData: DiaryData = response.data;
         setTitle(diaryData.title);
         setContent(diaryData.body);
@@ -51,7 +50,7 @@ function Diarycontent() {
         const updatedContent = contentRef.current.innerText;
         
         try {
-          await axios.post(`http://localhost:8080/diary/save`, {
+          await axios.post(`http://54.226.75.10:8080/diary/save`, {
             diaryId: diaryId,
             title: updatedTitle,
             body: updatedContent,

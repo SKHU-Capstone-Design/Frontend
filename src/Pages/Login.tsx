@@ -20,7 +20,6 @@ function Login() {
       setPassword(savedPassword);
       setSaveLogin(true);
 
-      // 컴포넌트가 랜더링되는 즉시 로컬스토리지에 저장된 이메일과 비밀번호가 있으면 로그인 버튼 활성화
       if (savedEmail !== '' && savedPassword !== '') {
         setLoginActive(true);
       }
@@ -62,7 +61,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/login', {
+      const response = await axios.post('http://34.239.189.147:8080/login', {
         email: email,
         password: password
       });

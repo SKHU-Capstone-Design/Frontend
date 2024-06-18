@@ -36,7 +36,7 @@ const Diary: React.FC = () => {
 
   const todayDiarySave = async () => {
     try {
-      await axios.post('http://localhost:8080/diary/save', {
+      await axios.post('http://34.239.189.147:8080/diary/save', {
         title: Body.title,
         body: Body.body,
         date: Body.date // date 필드를 포함하여 전송

@@ -1,45 +1,53 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../Styles/realhome.less';
-import '../Styles/Avatar.less';
-import '../Styles/Mypage.less';
 import Navbar from './Navbar';
 import mypageImg from '../public/mypage.png';
 
 function Mypage() {
-    const [email, setEmail] = useState(""); 
-    const [name, setName] = useState("");
-    const [gender, setGender] = useState("");
-    const [age, setAge] = useState("");
-    const [phone, setPhone] = useState("");
-    const navigate = useNavigate(); 
+    const [userInfo, setUserInfo] = useState({
+        email: '',
+        name: '',
+        gender: '',
+        age: '',
+        phone: ''
+    });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/user/info', {
+                const response = await axios.get('http://34.239.189.147:8080/user/info', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
                 });
-                
-                const userInfo = response.data;
-
-                setEmail(userInfo.email || "");
-                setName(userInfo.name || ""); 
-                setGender(userInfo.gender || ""); 
-                setAge(userInfo.age || ""); 
-                setPhone(userInfo.phone || ""); 
+                const userData = response.data;
+                const parsedUserInfo: Record<string, string> = {};
+                userData.split('\n').forEach((line: { split: (arg0: string) => [any, any]; }) => {
+                    const [key, value] = line.split(': ');
+                    if (key && value) {
+                        parsedUserInfo[key.trim().toLowerCase()] = value.trim();
+                    }
+                });
+                setUserInfo({
+                    email: parsedUserInfo['user email'] || '',
+                    name: parsedUserInfo['user name'] || '',
+                    gender: parsedUserInfo['user gender'] || '',
+                    age: parsedUserInfo['user age'] || '',
+                    phone: parsedUserInfo['user phone'] || ''
+                });
+                setLoading(false); 
             } catch (error) {
                 console.error('사용자 정보를 불러오는 중 에러 발생:', error);
-                alert('네트워크 에러가 발생했습니다. 다시 로그인해주세요.');
-                navigate('/user/login'); 
+                setLoading(false); 
             }
         };
 
         fetchUserInfo();
-    }, [navigate]);
+    }, []); 
+    if (loading) {
+        return <div>Loading...</div>; 
+    }
 
     return (
         <div>
@@ -54,7 +62,7 @@ function Mypage() {
                                 <input
                                     type="text"
                                     id='useremail'
-                                    value={email}
+                                    value={userInfo.email}
                                     readOnly
                                 />
                             </div>
@@ -63,7 +71,7 @@ function Mypage() {
                                 <input
                                     type="text"
                                     id='username'
-                                    value={name}
+                                    value={userInfo.name}
                                     readOnly
                                 />
                             </div>
@@ -75,7 +83,7 @@ function Mypage() {
                                     <input
                                         type="text"
                                         id='userGender'
-                                        value={gender}
+                                        value={userInfo.gender}
                                         readOnly
                                     />
                                 </div>
@@ -84,7 +92,7 @@ function Mypage() {
                                     <input
                                         type="text"
                                         id='userAge'
-                                        value={age}
+                                        value={userInfo.age}
                                         readOnly
                                     />
                                 </div>
@@ -93,7 +101,7 @@ function Mypage() {
                                     <input
                                         type="text"
                                         id='userPhone'
-                                        value={phone}
+                                        value={userInfo.phone}
                                         readOnly
                                     />
                                 </div>
