@@ -7,26 +7,15 @@ import Navbar from './Navbar';
 import '../Styles/realhome.less';
 import '../Styles/Diary.less';
 
-interface DiaryState {
-  title: string;
-  body: string;
-  date: string;
-}
-
-interface Params {
-  [key: string]: string | undefined;
-}
-
-const Diary: React.FC = () => {
-  const { date } = useParams<Params>(); 
-  const [Body, setBody] = useState<DiaryState>({
+const Diary = () => {
+  const { date } = useParams(); 
+  const [Body, setBody] = useState({
     title: '',
     body: '',
-    date: date || '' // URL 파라미터로부터 받은 날짜를 상태에 포함, date가 undefined일 경우 빈 문자열 할당
-    // 코드 수정 이전, 쿼리 파라미터로 서버에 요청을 보냈더니 서버에서 날짜를 식별하지 못했다. 백엔드 코드를 재검토한 결과, 본문(body)에서 날짜를 받아야 했다.    
+    date: date 
   });
 
-  const getValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const getValue = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setBody({
       ...Body,
@@ -36,13 +25,14 @@ const Diary: React.FC = () => {
 
   const todayDiarySave = async () => {
     try {
-      await axios.post('http://localhost:8080/diary/save', {
+      await axios.post('http://34.239.189.147:8080/diary/save', {
         title: Body.title,
         body: Body.body,
-        date: Body.date // date 필드를 포함하여 전송
+        date: Body.date
       }, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
 
@@ -53,7 +43,7 @@ const Diary: React.FC = () => {
   };
 
   return (
-    <div className="WirteWrap">
+    <div className="WriteWrap">
       <Navbar />
       <hr />
       <div className='FormWrapper'>
@@ -80,6 +70,6 @@ const Diary: React.FC = () => {
       <button className="submit-button" onClick={todayDiarySave}>저장</button> 
     </div>
   );
-}
+};
 
 export default Diary;

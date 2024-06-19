@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import NavBar from './Navbar.tsx';
-import { GoChevronRight, GoPerson, GoSignOut } from 'react-icons/go';
+import NavBar from './Navbar';
+import { GoChevronRight, GoPerson, GoSignOut, GoListUnordered } from 'react-icons/go';
 import '../Styles/Mypage.less';
 
 const MyPage = () => {
@@ -10,8 +10,14 @@ const MyPage = () => {
     navigate('/user/info/real');
   };
 
-  const goToRoutineReset = () => {
-    navigate('/user/bye');
+
+  const goToMyDiary = () => {
+    navigate('/diary/mydiary');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/user/login');
   };
 
   return (
@@ -25,9 +31,15 @@ const MyPage = () => {
             </div>
             <GoChevronRight className="my-page-icon" />
           </div>
-          <div className="my-page-card" onClick={goToRoutineReset}>
+          <div className="my-page-card" onClick={goToMyDiary}>
             <div className="my-page-text-navi">
-              <GoSignOut className="my-page-icon" />&nbsp;회원탈퇴
+              <GoListUnordered className="my-page-icon" />&nbsp; 작성글 목록
+            </div>
+            <GoChevronRight className="my-page-icon" />
+          </div>
+          <div className="my-page-card" onClick={handleLogout}>
+            <div className="my-page-text-navi">
+              <GoSignOut className="my-page-icon" />&nbsp; 로그아웃
             </div>
             <GoChevronRight className="my-page-icon" />
           </div>
