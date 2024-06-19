@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react';
 import '../Styles/DiaryList.less';
 import Navbar from './Navbar';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios'; 
+import axios from 'axios';
 
 interface DiaryPost {
-  No: string;
   title: string;
 }
 
@@ -13,7 +12,7 @@ function Mydiary() {
   const location = useLocation();
   const [storedPosts, setStoredPosts] = useState<DiaryPost[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState<number>(1); 
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -39,7 +38,6 @@ function Mydiary() {
 
         const data = response.data;
         const titlesOnly = data.map((diary: DiaryPost) => ({
-          No: diary.No,
           title: diary.title
         }));
         setStoredPosts(titlesOnly);
@@ -89,7 +87,6 @@ function DiaryTable({ storedPosts }: { storedPosts: DiaryPost[] }) {
       <table className='diarylist-table'>
         <thead>
           <tr>
-            <th className="diary-table-header">No</th>
             <th className="diary-table-header">Title</th>
           </tr>
         </thead>
@@ -106,7 +103,6 @@ function DiaryTable({ storedPosts }: { storedPosts: DiaryPost[] }) {
 function DiaryTableRow({ post }: { post: DiaryPost }) {
   return (
     <tr className="diary-table-row">
-      <td className="diary-table-data">{post.No}</td>
       <td className="diary-table-data">{post.title}</td>
     </tr>
   );
