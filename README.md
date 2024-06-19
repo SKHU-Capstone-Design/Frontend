@@ -1,30 +1,8 @@
-# React + TypeScript + Vite
+## 기술 스택
+이 프로젝트는 React와 TypeScript를 기반으로 개발되었습니다. Frontend 개발에는 React의 강력한 컴포넌트 기반 아키텍처와 TypeScript의 타입 안정성을 활용했습니다.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 배포
+프로젝트는 Vercel을 사용하여 신속하게 배포되었습니다. Vercel은 정적 웹사이트 배포에 최적화된 플랫폼으로, React 애플리케이션을 쉽게 호스팅하고 관리할 수 있습니다.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 추가 개발 계획
+프로젝트에는 유니티를 통해 구현하려고 했던 아바타 크기 조절 기능이 포함되어 있습니다. 현재 이 기능은 유니티에서는 구현되어 있지만, React 프로젝트로의 통합이 완료되지 않은 상태입니다. 이 기능은 향후 개발 계획에 포함되어 있어, 프로젝트의 완성도를 높이는 데 기여할 것으로 기대하고 있습니다.
