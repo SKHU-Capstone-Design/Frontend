@@ -23,10 +23,10 @@ const ByeWebsite = () => {
     <div>
       <NavBar />
       <div className="bywebsite-wrap">
-        <button className="bywebsite-btn" onClick={handleResetClick}>회원탈퇴</button>
+        <button className="bywebsite-btn" onClick={handleResetClick}>로그아웃</button>
         <div className="bywebsite-txt">
-          회원탈퇴를 진행합니다. <br/>
-          탈퇴 후에는 아바타 및 다이어리 정보를 복구할 수 없어요.
+          로그아웃을 진행합니다. <br/>
+          로그아웃 후에는 다시 로그인해야 합니다.
         </div>
       </div>
       {showModal && <Modal onClose={handleModalClose} onConfirm={handleResetConfirm} />}
