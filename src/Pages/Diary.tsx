@@ -5,9 +5,13 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useNavigate } from 'react-router-dom'; 
 import "../Styles/Calendar.less"; 
 
-function Diary() {
+const Diary = () => {
   const navigate = useNavigate(); 
   
+  const handleDateClick = (mydiary: { dateStr: string }) => {
+    navigate(`/diary/list/${mydiary.dateStr}`);
+  };
+
   return (
     <div>
       <Navbar />
@@ -16,13 +20,11 @@ function Diary() {
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           selectable={true}
-          dateClick={(mydiary) => {
-            navigate(`/diary/list/${mydiary.dateStr}`);
-          }}
+          dateClick={handleDateClick}
         />
       </div>
     </div>
   );
-}
+};
 
 export default Diary;

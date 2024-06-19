@@ -1,72 +1,80 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import '../Styles/Diarycontent.less';
+import axios, { AxiosError } from 'axios';
 import Navbar from './Navbar';
-import { BsPencil, BsTrash } from "react-icons/bs";
+import '../Styles/Diarycontent.less';
 
-interface DiaryParams {
-  [key: string]: string; 
+interface DiaryParams extends Record<string, string | undefined> {
+  date: string;
+  title: string;
 }
 
 interface DiaryData {
-  diaryId: string;
   title: string;
   body: string;
+  date: string;
 }
 
-function Diarycontent() {
-  const { diaryId } = useParams<DiaryParams>(); 
-  const [isEditMode, setIsEditMode] = useState(false);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+function DiaryContent() {
+  const { date, title } = useParams<DiaryParams>();
+  console.log('Params:', { date, title });
+
+  const [diary, setDiary] = useState<DiaryData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // 서버로부터 다이어리 데이터를 불러옴
     const fetchDiary = async () => {
       try {
-        const response = await axios.get(`http://34.239.189.147:8080/diary/${diaryId}`, {
+        if (!title || !date) {
+          throw new Error('Title or date is missing');
+        }
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          throw new Error('Access token is missing');
+        }
+
+        const response = await axios.get('http://34.239.189.147:8080/diary/findByTitleAndDate', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            Authorization: `Bearer ${accessToken}`
+          },
+          params: {
+            title,
+            date
           }
         });
-        const diaryData: DiaryData = response.data;
-        setTitle(diaryData.title);
-        setContent(diaryData.body);
+
+        if (response.status === 200) {
+          setDiary(response.data);
+          setError(null);
+        } else {
+          throw new Error(`Error: ${response.status}`);
+        }
       } catch (error) {
-        console.error('다이어리 데이터를 불러오는 데 실패했습니다.', error);
+        if (error instanceof AxiosError) {
+          if (error.response) {
+            setError(`Error: ${error.response.status} - ${error.response.data.message}`);
+          } else {
+            setError(error.message);
+          }
+        } else if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('Unknown error occurred');
+        }
+        console.error('Failed to fetch diary data:', error);
       }
     };
 
     fetchDiary();
-  }, [diaryId]);
+  }, [date, title]);
 
-  const handleEditClick = async () => {
-    if (isEditMode) {
-      if (titleRef.current && contentRef.current) {
-        const updatedTitle = titleRef.current.innerText;
-        const updatedContent = contentRef.current.innerText;
-        
-        try {
-          await axios.post(`http://54.226.75.10:8080/diary/save`, {
-            diaryId: diaryId,
-            title: updatedTitle,
-            body: updatedContent,
-            date: new Date().toISOString().split('T')[0] 
-          }, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
-          });
-        } catch (error) {
-          alert('다이어리 수정에 실패했습니다.');
-        }
-      }
-    }
-    setIsEditMode(!isEditMode);
-  };
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!diary) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -74,29 +82,11 @@ function Diarycontent() {
         <Navbar />
         <div className='diarybackground'>
           <div className='dairycontent'>
-            <div className='icons'>
-              <div className='icon' onClick={handleEditClick}>
-                <BsPencil className='pencil' />
-              </div>
-              <div className='icon'>
-                <BsTrash className='trash' />
-              </div>
+            <div className='diary_title'>
+              {diary.title}
             </div>
-            <div
-              className='diary_title'
-              contentEditable={isEditMode}
-              ref={titleRef}
-              suppressContentEditableWarning={true}
-            >
-              {title}
-            </div>
-            <div
-              className='diary_content'
-              contentEditable={isEditMode}
-              ref={contentRef}
-              suppressContentEditableWarning={true}
-            >
-              {content}
+            <div className='diary_content'>
+              {diary.body}
             </div>
           </div>
         </div>
@@ -106,4 +96,4 @@ function Diarycontent() {
   );
 }
 
-export default Diarycontent;
+export default DiaryContent;

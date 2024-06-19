@@ -1,78 +1,86 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../Styles/DiaryList.less';
+import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
-import { Link, useLocation } from 'react-router-dom';
+import '../Styles/DiaryList.less';
 
 interface DiaryPost {
-  diaryId: number;
+  diaryId: string;
   title: string;
+  body: string;
+  date: string;
 }
 
 function DiaryList() {
-  const location = useLocation();
+  const { date: diaryDate } = useParams<{ date: string }>();
   const [storedPosts, setStoredPosts] = useState<DiaryPost[]>([]);
-  
-  const getDateFromUrl = () => {
-    const pathArr = location.pathname.split('/');
-    return pathArr[pathArr.length - 1]; 
-  };
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDiariesByDate = async () => {
       try {
-        const date = getDateFromUrl();
-        const response = await axios.get(`/54.226.75.10:8080/diary/findByUserAndDate?date=${date}`);
-        if (Array.isArray(response.data)) {
-          const postsWithId = response.data.map((post: any) => ({
-            diaryId: post.diaryId,
-            title: post.title
-          }));
-          setStoredPosts(postsWithId);
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          throw new Error('Access token is missing');
+        }
+
+        const response = await axios.get('http://34.239.189.147:8080/diary/findByUserAndDate', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+          params: { date: diaryDate }
+        });
+
+        if (response.status === 200) {
+          setStoredPosts(response.data);
+          setError(null);
         } else {
-          console.error('데이터가 배열 형태가 아닙니다:', response.data);
-          setStoredPosts([]); // 형식이 예상과 다르면 빈 배열로 처리
+          throw new Error('서버로부터 응답이 유효하지 않습니다.');
         }
       } catch (error) {
-        console.error('다이어리 목록을 불러오는 중 에러 발생:', error);
-        setStoredPosts([]); // 에러 발생 시 빈 배열로 처리
+        console.error('데이터를 불러오는 동안 오류가 발생했습니다:', error);
+        setError('글을 작성해주세요');
       }
     };
 
-    fetchDiariesByDate();
-  }, [location.pathname]);
-  
+    if (diaryDate) {
+      fetchDiariesByDate();
+    }
+  }, [diaryDate]);
+
   return (
     <div className="diary-container">
       <Navbar />
-      <DiaryTable storedPosts={storedPosts} location={location} />
+      {error && <div className="error-message">{error}</div>}
+      <DiaryTable storedPosts={storedPosts} date={diaryDate} />
     </div>
   );
 }
 
 interface DiaryTableProps {
   storedPosts: DiaryPost[];
-  location: any;
+  date: string | undefined;
 }
 
-function DiaryTable({ storedPosts, location }: DiaryTableProps) {
+function DiaryTable({ storedPosts, date }: DiaryTableProps) {
   return (
     <div className="diary-table-wrap">
       <table className='diarylist-table'>
         <thead>
           <tr>
-            <th className="diary-table-header">No</th>
             <th className="diary-table-header">Title</th>
+            <th className="diary-table-header">Body</th>
+            <th className="diary-table-header">Date</th>
           </tr>
         </thead>
         <tbody>
           {storedPosts.map((post, index) => (
-            <DiaryTableRow key={index} post={post} location={location} />
+            <DiaryTableRow key={index} post={post} />
           ))}
         </tbody>
       </table>
       <div className='diary-write-btn'>
-        <Link to={`${location.pathname}/diary/save`}>
+        <Link to={`/diary/list/${date}/diary/save`}>
           <button className="diary-write-button">글 작성</button>
         </Link>
       </div>
@@ -82,18 +90,19 @@ function DiaryTable({ storedPosts, location }: DiaryTableProps) {
 
 interface DiaryTableRowProps {
   post: DiaryPost;
-  location: any;
 }
 
-function DiaryTableRow({ post, location }: DiaryTableRowProps) {
+function stripHtml(html: string) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || "";
+}
+
+function DiaryTableRow({ post }: DiaryTableRowProps) {
   return (
     <tr className="diary-table-row">
-      <td className="diary-table-data">{post.diaryId}</td>
-      <td className="diary-table-data">
-        <Link to={`${location.pathname}/diary/${post.diaryId}`} className="boardTextLink">
-          {post.title}
-        </Link>
-      </td>
+      <td className="diary-table-data">{post.title}</td>
+      <td className="diary-table-data">{stripHtml(post.body)}</td>
+      <td className="diary-table-data">{post.date}</td>
     </tr>
   );
 }
